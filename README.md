@@ -1,4 +1,4 @@
-# vuedongsan
+# VueStudy
 
 ## Project setup
 ```
