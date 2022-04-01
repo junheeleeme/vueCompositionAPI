@@ -1,7 +1,5 @@
-<template lang="">
-    <div>
-        Portfolio
-    </div>
+<template>
+    Portfolio
 </template>
 <script>
 export default {

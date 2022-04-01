@@ -1,17 +1,15 @@
 <template>
-  <div class="wrap">
     <HeaderComp />
-    <router-view />
-    <h1>Vue.js</h1>
-    <h2><span v-bind:class="isActive ? 'active' : ''">{{ title }}</span></h2>
-    <button @click="toggle">토글 버튼</button>
-  </div>
+    <MainComp />
+    <FooterComp />
 </template>
 
 <script>
 import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onErrorCaptured,
         onMounted, onUnmounted, onUpdated } from "vue";
-import HeaderComp from './components/HeaderComp.vue'
+import HeaderComp from './Layout/HeaderComp.vue'
+import MainComp from './Layout/MainComp.vue'
+import FooterComp from './Layout/FooterComp.vue'
 
 export default {
 
@@ -48,7 +46,7 @@ export default {
     }
   },
   components: {
-    HeaderComp
+    HeaderComp, MainComp, FooterComp
   },
   methods : {
     toggle(){
@@ -59,6 +57,10 @@ export default {
 }
 </script>
 <style>
+*{
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -66,10 +68,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-.active{
-  background: #000;
-
+.header, .main, .footer{
+  max-width: 770px;
 }
 
 </style>
