@@ -3,7 +3,7 @@
         
         <div class="logo">
             <h1>
-                <router-link to='/'>꾸생</router-link>
+                <router-link to='/'>Logo</router-link>
             </h1>
         </div>
         
@@ -16,16 +16,17 @@
                     <router-link to='/about'>About</router-link>
                 </li>
                 <li>
-                    <router-link to='/portfolio'>Portfolio</router-link>
+                    <router-link to='/contact'>Contact</router-link>
                 </li>
                 <li>
-                    <router-link to='/contact'>Contact</router-link>
+                    {{$store.state.count}}
                 </li>
             </ul>
         </nav>
     </header>
 </template>
 <script>
+
 export default {
     name : 'HeaderComp',
 
@@ -39,7 +40,15 @@ export default {
     height: 60px; 
     background: #ebebeb;
 }
-.logo{ width: 100px; }
+.logo{ 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 25%; height: 100%;
+    padding-left: 1.5rem;
+}
+.logo>h1{ margin: 0; }
+
 .logo a{
     font-size: 1.3rem;
     text-decoration: none !important;

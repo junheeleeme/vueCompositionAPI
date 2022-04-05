@@ -1,8 +1,15 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios';
+import store from './store/store';
 
-// import navList from './navList'
+const app = createApp(App);
 
+app.config.globalProperties = {
+    $axios : axios,  //axios 전역 설정
+    $store : store,  //vuex store 전역 설정
+}
 
-createApp(App).use(router).mount('#app')
+app.use(router, store).mount('#app');
+

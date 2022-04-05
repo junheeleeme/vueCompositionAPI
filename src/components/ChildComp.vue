@@ -1,11 +1,13 @@
 <template>
-    Portfolio
+    <div>
+
+    </div>
 </template>
 <script>
 export default {
-    
+    name : 'ChildComp',
 }
 </script>
-<style lang="">
+<style>
     
 </style>
