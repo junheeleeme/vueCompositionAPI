@@ -1,68 +1,72 @@
 <template>
 
     <h2 class="subTitle">Home
-        <button @click="show = !show">Toggle</button>
+        <button @click="change">Toggle</button>
 
-    </h2>
-
-    <ul class="postWrap" v-if="show">
-        <li class='postItem' v-for="post in posts" :key="post.id">
-            <router-link class="postItem-wrap" :to="`/detail/${post.id}`" >
-                <div class="postThumb" />
-                <div class="postContent">
-                    <h3 class='postTitle'>{{ post.title }}</h3>
-                    <div class="postBody">
-                        {{ post.body }}
+    </h2>   
+        <ul class="postWrap" v-if="show">
+            <li class='postItem' v-for="post in posts" :key="post.id">
+                <router-link class="postItem-wrap" :to="`/detail/${post.id}`" >
+                    <div class="postThumb" />
+                    <div class="postContent">
+                        <h3 class='postTitle'>{{ post.title }}</h3>
+                        <div class="postBody">
+                            {{ post.body }}
+                        </div>
                     </div>
-                </div>
-            </router-link>
-        </li>
-    </ul>
-
-    <ul class="postWrap" v-else>
-        <li class='postItem' v-for="cnt in skeletonCnt" :key="cnt">
-            <a class="postItem-wrap" href="#" >
-                <div class="postThumb skeleton" />
-                <div class="postContent">
-                    <h3 class='postTitle skeleton' />
-                    <div class="postBody skeleton" />
-                </div>
-                <div class="skeleton-bar" />
-            </a>
-        </li>
-    </ul>
-
-
+                </router-link>
+            </li>
+        </ul>
+        <ul class="postWrap" v-else>
+            <li class='postItem' v-for="cnt in skeletonCnt" :key="cnt">
+                <a class="postItem-wrap" href="#" >
+                    <div class="postThumb skeleton" />
+                    <div class="postContent">
+                        <h3 class='postTitle skeleton' />
+                        <div class="postBody skeleton" />
+                    </div>
+                    <div class="skeleton-bar" />
+                </a>
+            </li>
+        </ul>
 </template>
 <script>
+import { ref, watchEffect } from 'vue'
+import axios from 'axios'
+
 export default {
     name : 'HomeComp',
-    created(){
-        this.$axios('https://jsonplaceholder.typicode.com/posts').then(res => {
+    setup()
+    {
+        const skeletonCnt = ref(5);
+        const show = ref(false);
+        const posts = ref([]);
+        axios('https://jsonplaceholder.typicode.com/posts').then(res => {
             if(res.status === 200){
-                this.posts = res.data;
+                posts.value = res.data;
             }else{
                 console.log(res);
             }
         }).catch(err => console.log(err));
-    },
-    data(){
-        return{
-            show : false,
-            posts : [],
-            skeletonCnt : 5
-        }
-    },
-    watch: {
-        posts(next){
-            if(next.length > 0){
-                this.show = true;
+
+        watchEffect(()=> {
+            console.log('watchEffect 실행')
+            if(posts.value.length > 0){
+                show.value = true;
             }
-        },
+        })
 
+        function change(){
+            show.value = !show.value; 
+        }
+
+        return { skeletonCnt, posts, show, change }
+    },
+    watch:{
+        posts(next){
+            if(next.length>0) this.show = true;
+        }
     }
-
-
 }
 </script>
 <style>
