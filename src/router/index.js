@@ -1,15 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../pages/HomeComp'
-import About from '../pages/AboutComp'
-import Contact from '../pages/ContactComp'
+import Fetch from '../pages/FetchComp'
+import Vuex from '../pages/VuexComp'
+import Router from '../pages/RouterComp'
 import Error from '../pages/ErrorComp'
 import Detail from '../pages/DetailComp'
 
 const routes = [
     { path : '/', name : 'Home', component : Home },
+    { path : '/fetch', name : 'Fetch', component : Fetch },
     { path : '/detail/:id', name : 'Detail', component : Detail },
-    { path : '/about', name : 'About', component : About },
-    { path : '/contact', name : 'Contact', component : Contact, props : true },
+    { path : '/vuex', name : 'Vuex', component : Vuex },
+    { path : '/router', name : 'Router', component : Router },
+    { path : '/router/:id', name : 'RouterParams', component : Router },
     { path : '/404', name : 'Not-Found', component : Error },
     { path: '/:pathMatch(.*)*', redirect : '/404' }
 ]

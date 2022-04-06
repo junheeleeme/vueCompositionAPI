@@ -11,5 +11,5 @@ app.config.globalProperties = {
     $store : store,  //vuex store 전역 설정
 }
 
-app.use(router, store).mount('#app');
+app.use(router).use(store).mount('#app');
 

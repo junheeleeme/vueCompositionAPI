@@ -3,33 +3,35 @@
         
         <div class="logo">
             <h1>
-                <router-link to='/'>Logo</router-link>
+                <router-link to='/'>Vue.js 3.0</router-link>
             </h1>
         </div>
         
         <nav class="nav">
             <ul class="nav-list">
-                <li>
-                    <router-link to='/'>Home</router-link>
-                </li>
-                <li>
-                    <router-link to='/about'>About</router-link>
-                </li>
-                <li>
-                    <router-link to='/contact'>Contact</router-link>
-                </li>
-                <li>
-                    {{$store.state.count}}
+                
+                <li v-for="menu in menuList" :key="menu.id">
+                    <router-link :to="menu.url">{{menu.title}}</router-link>
                 </li>
             </ul>
         </nav>
+
+        <div class="storeWrap">
+            Counter : {{$store.state.count}}
+        </div>
     </header>
 </template>
 <script>
+import { ref } from 'vue'
+import { menu } from '../menu'
 
 export default {
     name : 'HeaderComp',
-
+    setup(){
+        const menuList = ref(menu);
+        
+        return { menuList }
+    }
 }
 </script>
 <style>
@@ -50,6 +52,8 @@ export default {
 .logo>h1{ margin: 0; }
 
 .logo a{
+    position: relative;
+    top: -3px;
     font-size: 1.3rem;
     text-decoration: none !important;
     color: #000;
@@ -60,7 +64,7 @@ export default {
 .nav{
     display: block;
     width: 75%;
-    height: 25px;
+    height: 20px;
     margin: 0;
 }
 .nav-list{
@@ -89,10 +93,22 @@ a.router-link-active::after{
     content: '';
     display: inline-block;
     position: absolute;
-    bottom: -5px; left: 0;
+    bottom: -5px; left: -5%;
     width: 110% !important; height: 2px;
     background: #000;
 }
-
+.storeWrap{
+    position: absolute;
+    top: 50px; right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; height: 50px;
+    background: rgba(255, 0, 0, 0.836);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+}
 
 </style>
