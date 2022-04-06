@@ -6,30 +6,31 @@
         <div class="detail-post-body">
             {{post.body}}
         </div>
-         <button class="goback" @click="$router.push('/')">
+         <button class="goback" @click="$router.push('/fetch')">
                 Go to List
         </button>
     </div>
 </template>
 <script>
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import axios from 'axios'
+
 export default {
     name : 'DetailComp',
-    data(){
-        return{
-            id : this.$route.params.id,
-            post : {}
-        }
-    },
-    created(){
-        this.$axios('https://jsonplaceholder.typicode.com/posts/'+this.id).then(res => {
+    setup(){
+        const { params } = useRoute();
+        const post = ref({});
+
+        axios('https://jsonplaceholder.typicode.com/posts/'+params.id).then(res => {
             if(res.status === 200){
-                this.post = res.data;
+                post.value = res.data;
             }else{
                 console.log(res);
             }
         }).catch(err => console.log(err));
-    },
-
+        return { post }
+    }
 }
 </script>
 <style>

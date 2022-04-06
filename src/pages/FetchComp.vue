@@ -1,9 +1,14 @@
 <template>
 
-    <h2 class="subTitle">Fetch API
-        <button @click="change">Toggle</button>
+    <h2 class="subTitle">Fetch API</h2>   
 
-    </h2>   
+    <div class="btn-wrap">
+        <button class="btn" @click="apiGetPosts">Get Posts</button>
+        <button class="btn" @click="clearData">Posts Clear</button>
+        <button class="btn" @click="toggle">Toggle</button>
+    </div>
+        
+
         <ul class="postWrap" v-if="show">
             <li class='postItem' v-for="post in posts" :key="post.id">
                 <router-link class="postItem-wrap" :to="`/detail/${post.id}`" >
@@ -31,7 +36,7 @@
         </ul>
 </template>
 <script>
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import axios from 'axios'
 
 export default {
@@ -41,32 +46,33 @@ export default {
         const skeletonCnt = ref(5);
         const show = ref(false);
         const posts = ref([]);
-        axios('https://jsonplaceholder.typicode.com/posts').then(res => {
-            if(res.status === 200){
-                posts.value = res.data;
-            }else{
-                console.log(res);
-            }
-        }).catch(err => console.log(err));
+ 
+        const apiGetPosts = () => {
+            axios('https://jsonplaceholder.typicode.com/posts').then(res => {
+                if(res.status === 200){
+                    posts.value = res.data;
+                }else{
+                    console.log(res);
+                }
+            }).catch(err => console.log(err));
+        }
+        apiGetPosts();
 
-        watchEffect(()=> {
-            console.log('watchEffect 실행')
-            if(posts.value.length > 0){
-                show.value = true;
-            }
+        const clearData = () => posts.value = []
+        const toggle = () => show.value = !show.value
+
+        watch(()=>  posts.value, ()=> {
+            console.log('posts 업데이트')
+            if(posts.value.length > 0) show.value = true;
         })
 
-        function change(){
-            show.value = !show.value; 
+        return { 
+            skeletonCnt, posts, show, 
+            apiGetPosts,
+            toggle,
+            clearData         
         }
-
-        return { skeletonCnt, posts, show, change }
     },
-    watch:{
-        posts(next){
-            if(next.length>0) this.show = true;
-        }
-    }
 }
 </script>
 <style>
@@ -78,6 +84,12 @@ export default {
     width: 100%;
     text-align: left;
     font-size: 1.5rem;
+    padding: 0.5rem 0;
+}
+.btn-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.5rem 0;
 }
 .postWrap{
