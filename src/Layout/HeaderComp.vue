@@ -1,25 +1,22 @@
-<template>
-    <header class="header">
-        
-        <div class="logo">
-            <h1>
-                <router-link to='/'>Vue.js 3.0</router-link>
-            </h1>
-        </div>
-        
-        <nav class="nav">
-            <ul class="nav-list">
-                
-                <li v-for="menu in menuList" :key="menu.id">
-                    <router-link :to="menu.url">{{menu.title}}</router-link>
-                </li>
-            </ul>
-        </nav>
+<template>        
+    <div class="logo">
+        <h1>
+            <router-link to='/'>Vue.js 3.0</router-link>
+        </h1>
+    </div>
+    
+    <nav class="nav">
+        <ul class="nav-list">
+            
+            <li v-for="menu in menuList" :key="menu.id">
+                <router-link :to="menu.url">{{menu.title}}</router-link>
+            </li>
+        </ul>
+    </nav>
 
-        <div class="storeWrap">
-            Counter : {{$store.state.count}}
-        </div>
-    </header>
+    <div class="storeWrap">
+        Counter : {{$store.state.count}}
+    </div>
 </template>
 <script>
 import { ref } from 'vue'
@@ -35,28 +32,26 @@ export default {
 }
 </script>
 <style>
-.header{
+.ant-layout-header{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px; 
-    background: #ebebeb;
 }
+
 .logo{ 
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 25%; height: 100%;
-    padding-left: 1.5rem;
-}
+    }
 .logo>h1{ margin: 0; }
 
 .logo a{
     position: relative;
-    top: -3px;
-    font-size: 1.3rem;
+    top: 0px;
+    font-size: 1.4rem;
     text-decoration: none !important;
-    color: #000;
+    color: #fff;
 }
 .logo a.router-link-active::after{
     content: none;
@@ -64,12 +59,12 @@ export default {
 .nav{
     display: block;
     width: 75%;
-    height: 20px;
+    height: 100%;
     margin: 0;
 }
 .nav-list{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     padding-left: 0;
     list-style: none;
@@ -78,7 +73,7 @@ export default {
     position: relative;
     text-decoration: none;
     font-size: 1.1rem;
-    color: #000;
+    color: #fff;
 }
 
 .nav-list>li>a::after{
@@ -95,11 +90,11 @@ a.router-link-active::after{
     position: absolute;
     bottom: -5px; left: -5%;
     width: 110% !important; height: 2px;
-    background: #000;
+    background: #fff;
 }
 .storeWrap{
     position: absolute;
-    top: 50px; right: 50px;
+    top: 100px; right: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
