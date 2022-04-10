@@ -12,9 +12,15 @@ const routes = [
     { path : '/detail/:id', name : 'Detail', component : Detail },
     { path : '/vuex', name : 'Vuex', component : Vuex },
     { path : '/router', name : 'Router', component : Router },
-    { path : '/router/:id', name : 'RouterParams', component : Router },
     { path : '/404', name : 'Not-Found', component : Error },
     { path: '/:pathMatch(.*)*', redirect : '/404' }
+]
+
+export const menu = [
+    { id : 0, path : '/', name : 'Home' },
+    { id : 1, path : '/fetch', name : 'Fetch' },
+    { id : 2, path : '/vuex', name : 'Vuex' },
+    { id : 3, path : '/router?page=1', name : 'Router' },
 ]
 
 const router = createRouter({

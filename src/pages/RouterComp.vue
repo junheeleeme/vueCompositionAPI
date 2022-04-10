@@ -1,24 +1,18 @@
 <template>
     <h2 class="subTitle">Vue-Router</h2>
 
-    <ul class="router-list">
-        <li>Params : {{param}}</li>
-        <li>Query String : {{queryName}}</li>
-    </ul>
+    <div class="search-wrap">
+        <input type="text" @input="typeSearch" />
+        <button @click="goSearch">검색</button>
+    </div>
+    
+    <div class="body-wrap">
 
-    <div class="nameWrap">
+        <p v-show="pageNum">현재 페이지 번호 : {{pageNum}}</p>
+        <p v-show="target">검색 타겟 : {{target}}</p>
 
-        <div class="inputWrap">
-            <div>이름 : </div> 
-            <input type="text" @input="changeName" class="yourName" maxlength="30">
-        </div>
+    </div>   
 
-        <div class="btnWrap">
-            <button class="btn" @click="router.push(`/router/${queryStr}`)">Param Test</button>
-            <button class="btn" @click="router.push(`/router/param?name=${queryStr}`)">Query Test</button>
-        </div>
-
-    </div>    
 
 </template>
 <script>
@@ -29,26 +23,27 @@ export default {
     name : 'ContactComp',
     setup(){
         const router = useRouter();
-        const { params, query } = useRoute();
-        const param = ref(params.id);
-        const queryName = ref(query.name);
-        const queryStr = ref('');
+        const { query } = useRoute();
+        const pageNum = ref(query.page);
+        const target = ref(query.target);
+        const searchWord = ref('');
 
-        console.log(query)
+        const goSearch = () => {
+            router.push('/router?page=1&target=' + encodeURI(searchWord.value));
+        }
+        const typeSearch = (e) => {
+            searchWord.value = e.target.value.trim(); 
+            console.log(searchWord.value);
+        }
 
-        const changeName = (e) => {
-            queryStr.value = encodeURI(e.target.value.trim());
-            console.log(queryStr.value)
+        return{ 
+            pageNum,
+            target,
+            searchWord,
+            goSearch,
+            typeSearch,
         }
-        
-        return { 
-            router,
-            param,
-            queryName,
-            changeName,
-            queryStr
-        }
-    }
+    }        
 }
 
 </script>
@@ -60,19 +55,18 @@ export default {
     align-items: center;
     height: 150px;
 }
-.inputWrap{
+.search-wrap{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.nameWrap>div {
+    width: 100%;
     font-size: 1.25rem;
-    margin-right: 0.5rem;
+}
+.body-wrap{
+    padding: 1rem 0;
     margin: 0;
 }
-.inputWrap>input{
-    margin-left: 0.5rem;
-}
+
 .router-list{ 
     display: flex;
     flex-direction: column;

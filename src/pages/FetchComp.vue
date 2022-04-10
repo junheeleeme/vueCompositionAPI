@@ -84,7 +84,6 @@ export default {
     width: 100%;
     text-align: left;
     font-size: 1.5rem;
-    padding: 0.5rem 0;
 }
 .btn-wrap{
     display: flex;

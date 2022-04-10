@@ -1,18 +1,23 @@
 <template>
  <a-layout>
-  <a-layout-sider>Sider</a-layout-sider>
+
+  <a-layout-sider>
+    <SidebarComp />
+  </a-layout-sider>
 
     <a-layout>
 
       <a-layout-header>
         <HeaderComp />
       </a-layout-header>
+
         <a-layout-content>
         <MainComp />
-        <FooterComp />
         </a-layout-content>
 
-      <a-layout-footer>Footer</a-layout-footer>
+      <a-layout-footer>
+        <FooterComp />  
+      </a-layout-footer>
       
     </a-layout>
 
@@ -22,6 +27,7 @@
 
 <script>
 import 'ant-design-vue/dist/antd.css'
+import SidebarComp from './layout/SidebarComp.vue'
 import HeaderComp from './layout/HeaderComp.vue'
 import MainComp from './layout/MainComp.vue'
 import FooterComp from './layout/FooterComp.vue'
@@ -33,7 +39,10 @@ export default {
     console.log('시작!');
   },
   components: {
-    HeaderComp, MainComp, FooterComp
+    SidebarComp,
+    HeaderComp, 
+    MainComp, 
+    FooterComp,
   }  
 }
 </script>
@@ -56,7 +65,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar{
   margin: 0;
 }
 ul{
-    list-style: none;
+    list-style: none !important;
     padding-left: 0;
     margin-bottom: 0;
 }
@@ -65,6 +74,15 @@ a{
   text-decoration: none;
   color: #000;  
 }
+.ant-layout{
+  height: 100vh;
+}
 
+.ant-layout-content{
+  height: calc( 100vh - 64px );
+  overflow: scroll;
+}
+
+.ant-layout-footer{ padding:0; }
 
 </style>
