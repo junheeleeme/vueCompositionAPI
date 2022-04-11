@@ -60,6 +60,10 @@ export default {
     content: none;
 }
 
+.logo a.router-link-exact-active{
+    font-weight: normal;
+}
+
 .navItem>a{
     display: flex;
     justify-content: flex-start;

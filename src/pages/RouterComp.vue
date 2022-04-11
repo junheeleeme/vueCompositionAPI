@@ -2,7 +2,7 @@
     <h2 class="subTitle">Vue-Router</h2>
 
     <div class="search-wrap">
-        <input type="text" @input="typeSearch" />
+        <input type="text" @input="typeSearch" :value="inputWord" @keydown.enter="goSearch" />
         <button @click="goSearch">검색</button>
     </div>
     
@@ -16,7 +16,7 @@
 
 </template>
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
@@ -36,12 +36,17 @@ export default {
             console.log(searchWord.value);
         }
 
+        const inputWord = computed(()=>{
+            return target.value === undefined ? '' : target.value;
+        });
+
         return{ 
             pageNum,
             target,
             searchWord,
             goSearch,
             typeSearch,
+            inputWord
         }
     }        
 }
@@ -65,6 +70,7 @@ export default {
 .body-wrap{
     padding: 1rem 0;
     margin: 0;
+    font-size: 1.25rem;
 }
 
 .router-list{ 

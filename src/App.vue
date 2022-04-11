@@ -79,10 +79,16 @@ a{
 }
 
 .ant-layout-content{
-  height: calc( 100vh - 64px );
+  width: calc(100vw - 200px);
+  height: calc(100vh - 114px);
+  padding: 1rem;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
-.ant-layout-footer{ padding:0; }
+.ant-layout-footer{ 
+  background: rgb(176, 176, 179);
+  padding:0; 
+}
 
 </style>

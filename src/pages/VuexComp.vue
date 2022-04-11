@@ -1,7 +1,7 @@
 <template>
     <h2 class="subTitle">Vuex - Store</h2>  
         
-        <p>{{count}}</p>
+        <p class="store-view" >{{count}}</p>
         <button class="btn" @click="increase">Plus</button>
         <button class="btn" @click="decrease">Minus</button>
 
@@ -33,5 +33,10 @@ export default {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+.store-view{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: red;
 }
 </style>

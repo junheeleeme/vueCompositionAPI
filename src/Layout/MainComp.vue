@@ -1,8 +1,7 @@
 <template>
     
-    <main class="main">
-        <router-view :key="$route.fullPath" />
-    </main>
+    <router-view :key="$route.fullPath" />
+
 
 </template>
 <script>
@@ -12,7 +11,6 @@ export default {
 </script>
 <style>
 .main{
-    min-height: calc(100vh - 110px);
     padding: 1rem;
     background: #fcfcfc;
     font-size: 2rem;

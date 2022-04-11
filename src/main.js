@@ -5,6 +5,7 @@ import 'ant-design-vue/dist/antd.css'
 import router from './router'
 import axios from 'axios'
 import store from './store/store'
+import { todoStore } from './store/store'
 
 const app = createApp(App);
 
@@ -13,4 +14,4 @@ app.config.globalProperties = {
     $store : store,  //vuex store 전역 설정
 }
 
-app.use(Antd).use(router).use(store).mount('#app');
+app.use(Antd).use(router).use(store).use(todoStore).mount('#app');

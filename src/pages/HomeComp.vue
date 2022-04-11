@@ -1,6 +1,6 @@
 <template>
-  
-    123
+
+    Home
 
 </template>
 <script>

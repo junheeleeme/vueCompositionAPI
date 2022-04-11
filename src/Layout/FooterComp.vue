@@ -20,7 +20,6 @@ export default {
     justify-content: flex-end;
     align-items: center;
     height: 50px;
-    background: rgb(238, 238, 238);
 }
 .footer>p{
     font-size: 0.8rem;
