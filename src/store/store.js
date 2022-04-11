@@ -1,25 +1,9 @@
 import { createStore } from "vuex"
 import createPersistedState from "vuex-persistedstate";
 
- const store = createStore({
+ export const store = createStore({
     state : {
-        count : 0
-    },
-    mutations: {
-        increase(state, value){
-            state.count += value;
-        },
-        decrease(state, value){
-            state.count -= value;
-        }
-    },
-    plugins : [ createPersistedState({
-        paths: ["count"]
-    }) ],
-})
-
-export const todoStore = createStore({
-    state : {
+        count : 0,
         todos : [
             {
                 // id: 0,
@@ -28,6 +12,12 @@ export const todoStore = createStore({
         ]
     },
     mutations: {
+        increase(state, value){
+            state.count += value;
+        },
+        decrease(state, value){
+            state.count -= value;
+        },
         insertTodo(state, todo){
             state.todos.push(todo);
         },
@@ -36,8 +26,6 @@ export const todoStore = createStore({
         }
     },
     plugins : [ createPersistedState({
-        paths: ["todos"]
+        paths: ["count", "todos"]
     }) ],
 })
-
-export default store
