@@ -1,15 +1,9 @@
-import { createStore } from "vuex"
 import createPersistedState from "vuex-persistedstate";
+import { createStore } from "vuex";
 
- export const store = createStore({
-    state : {
+const countStore = {
+    state: {
         count : 0,
-        todos : [
-            {
-                // id: 0,
-                // todo : '집가기'
-            },
-        ]
     },
     mutations: {
         increase(state, value){
@@ -18,6 +12,22 @@ import createPersistedState from "vuex-persistedstate";
         decrease(state, value){
             state.count -= value;
         },
+    },
+    // plugins : [ createPersistedState({
+    //     paths: ["count"]
+    // }) ],
+}
+
+const todosStore = {
+    state :{
+        todos : [
+            // {
+            //     id: 0,
+            //     todo : '집가기'
+            // },
+        ]
+    },
+    mutations: {
         insertTodo(state, todo){
             state.todos.push(todo);
         },
@@ -25,7 +35,17 @@ import createPersistedState from "vuex-persistedstate";
             state.todos.splice(index, 1);
         }
     },
+    // plugins : [ createPersistedState({
+    //     paths: ["todos"]
+    // }) ],
+}
+
+export const store = createStore({
+    modules:{
+        countStore,
+        todosStore
+    },
     plugins : [ createPersistedState({
-        paths: ["count", "todos"]
-    }) ],
+        paths: ["countStore", "todosStore"]
+    })],
 })

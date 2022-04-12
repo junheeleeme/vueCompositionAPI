@@ -21,7 +21,7 @@ export default {
     name : 'TodoList',
     setup(){
         const store = useStore();
-        const todos = computed(()=> store.state.todos );
+        const todos = computed(()=> store.state.todosStore.todos );
         const todoTxt = ref('');
         const todoInput = ref(null);
 

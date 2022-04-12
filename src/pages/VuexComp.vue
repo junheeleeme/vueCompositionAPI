@@ -7,18 +7,17 @@
 
 </template>
 <script>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
     name : 'FetchComp',
     setup(){
-        
         const store = useStore();
-        const count = computed(()=> store.state.count );
+        const count = computed(()=> store.state.countStore.count );
         const increase = () => store.commit('increase', 1);        
         const decrease = () => store.commit('decrease', 1);
-
+        console.log(store)
         return { count, increase, decrease } 
     },
 }
