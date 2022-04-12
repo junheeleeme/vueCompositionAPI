@@ -17,7 +17,7 @@ export default {
     name : 'HeaderComp',
     setup(){
         const store = useStore();
-        const count = computed(()=> store.state.count );
+        const count = computed(()=> store.state.countStore.count );
         
         return { count }
     }

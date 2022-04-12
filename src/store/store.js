@@ -1,5 +1,12 @@
 import createPersistedState from "vuex-persistedstate";
+import SecureLS from "secure-ls";
 import { createStore } from "vuex";
+
+const ls = new SecureLS({
+    encodingType : "aes",
+    isCompression : false,
+    encryptionSecret : '123'
+})
 
 const countStore = {
     state: {
@@ -13,9 +20,6 @@ const countStore = {
             state.count -= value;
         },
     },
-    // plugins : [ createPersistedState({
-    //     paths: ["count"]
-    // }) ],
 }
 
 const todosStore = {
@@ -35,9 +39,6 @@ const todosStore = {
             state.todos.splice(index, 1);
         }
     },
-    // plugins : [ createPersistedState({
-    //     paths: ["todos"]
-    // }) ],
 }
 
 export const store = createStore({
@@ -46,6 +47,12 @@ export const store = createStore({
         todosStore
     },
     plugins : [ createPersistedState({
+        key: 'data',
+        storage: {
+            getItem: (key) => ls.get(key),
+            setItem: (key, value) => ls.set(key, value),
+            removeItem: (key) => ls.remove(key),
+        },
         paths: ["countStore", "todosStore"]
     })],
 })
